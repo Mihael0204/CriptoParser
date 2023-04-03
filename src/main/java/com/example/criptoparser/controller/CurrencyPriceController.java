@@ -1,11 +1,11 @@
 package com.example.criptoparser.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.validation.Valid;
 import com.example.criptoparser.dto.CurrencyDto;
 import com.example.criptoparser.dto.mapper.CurrencyPriceMapper;
 import com.example.criptoparser.service.CurrencyPriceService;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

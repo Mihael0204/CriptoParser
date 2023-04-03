@@ -1,11 +1,5 @@
 package com.example.criptoparser.service.impl;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.example.criptoparser.dto.ApiCurrencyDto;
 import com.example.criptoparser.dto.mapper.CurrencyPriceMapper;
 import com.example.criptoparser.model.CurrencyPrice;
@@ -15,6 +9,11 @@ import com.example.criptoparser.service.CurrencyPriceService;
 import com.example.criptoparser.service.FileWriter;
 import com.example.criptoparser.service.HttpClient;
 import com.example.criptoparser.service.ReportCreator;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +21,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CurrencyPriceServiceImpl  implements CurrencyPriceService {
+public class CurrencyPriceServiceImpl implements CurrencyPriceService {
     private static final String WRITE_TO = "src/main/resources/result.csv";
     private static final Set<String> currencies = Set.of("BTC", "ETH", "XRP");
     private final HttpClient httpClient;
@@ -48,9 +47,9 @@ public class CurrencyPriceServiceImpl  implements CurrencyPriceService {
     @Scheduled(cron = "*/10 * * * * ?")
     public void syncExternalCurrency() {
         for (String currency: currencies) {
-                ApiCurrencyDto apiCurrencyDto =
+            ApiCurrencyDto apiCurrencyDto =
                     httpClient.get(apiUrl + currency + "/USD", ApiCurrencyDto.class);
-                currencyPriceRepository.save(currencyPriceMapper.toModel(apiCurrencyDto));
+            currencyPriceRepository.save(currencyPriceMapper.toModel(apiCurrencyDto));
         }
     }
 

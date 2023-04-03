@@ -1,9 +1,9 @@
 package com.example.criptoparser.service.impl;
 
+import com.example.criptoparser.service.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import com.example.criptoparser.service.FileWriter;
 import org.springframework.stereotype.Component;
 
 @Component

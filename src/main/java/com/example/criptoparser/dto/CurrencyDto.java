@@ -1,7 +1,7 @@
 package com.example.criptoparser.dto;
 
-import java.math.BigInteger;
 import com.example.criptoparser.validation.CurrencyType;
+import java.math.BigInteger;
 import lombok.Data;
 
 @Data

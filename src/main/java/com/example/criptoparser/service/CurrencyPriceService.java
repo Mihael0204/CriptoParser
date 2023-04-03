@@ -1,7 +1,7 @@
 package com.example.criptoparser.service;
 
-import java.util.List;
 import com.example.criptoparser.model.CurrencyPrice;
+import java.util.List;
 
 public interface CurrencyPriceService {
 

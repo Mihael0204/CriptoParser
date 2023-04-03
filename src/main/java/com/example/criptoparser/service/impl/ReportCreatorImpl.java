@@ -1,8 +1,8 @@
 package com.example.criptoparser.service.impl;
 
-import java.util.List;
 import com.example.criptoparser.model.ReportRow;
 import com.example.criptoparser.service.ReportCreator;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component

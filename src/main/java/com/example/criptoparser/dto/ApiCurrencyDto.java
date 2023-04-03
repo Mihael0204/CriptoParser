@@ -1,7 +1,7 @@
 package com.example.criptoparser.dto;
 
-import java.math.BigInteger;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.math.BigInteger;
 import lombok.Data;
 
 @Data
