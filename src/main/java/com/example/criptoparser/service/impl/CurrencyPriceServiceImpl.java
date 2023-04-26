@@ -69,9 +69,9 @@ public class CurrencyPriceServiceImpl implements CurrencyPriceService {
     @Override
     public List<CurrencyPrice> getAll(String currencyName, int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
-        Page<CurrencyPrice> list = currencyPriceRepository
+        Page<CurrencyPrice> currencyPricesList = currencyPriceRepository
                 .findByCryptoCurrencyOrderByPriceAsc(currencyName, pageRequest);
-        return list.stream().map(currencyPriceMapper::toDto).toList()
+        return currencyPricesList.stream().map(currencyPriceMapper::toDto).toList()
                 .stream().map(currencyPriceMapper::toModel).collect(Collectors.toList());
     }
 
@@ -102,11 +102,11 @@ public class CurrencyPriceServiceImpl implements CurrencyPriceService {
     }
 
     private CurrencyPrice getBasicObject(List<CurrencyPrice> list) {
-        ApiCurrencyDto api = new ApiCurrencyDto();
-        api.setId(list.get(0).getId());
-        api.setCryptoCurrency(list.get(0).getCryptoCurrency());
-        api.setFiatCurrency(list.get(0).getFiatCurrency());
-        api.setPrice(list.get(0).getPrice().doubleValue());
-        return currencyPriceMapper.toModel(api);
+        ApiCurrencyDto currencyDto = new ApiCurrencyDto();
+        currencyDto.setId(list.get(0).getId());
+        currencyDto.setCryptoCurrency(list.get(0).getCryptoCurrency());
+        currencyDto.setFiatCurrency(list.get(0).getFiatCurrency());
+        currencyDto.setPrice(list.get(0).getPrice().doubleValue());
+        return currencyPriceMapper.toModel(currencyDto);
     }
 }
