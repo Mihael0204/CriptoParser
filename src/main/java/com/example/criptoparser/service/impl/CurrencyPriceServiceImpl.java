@@ -58,12 +58,12 @@ public class CurrencyPriceServiceImpl implements CurrencyPriceService {
 
     @Override
     public CurrencyPrice getMaxPrice(String currencyName) {
-        return currencyPriceRepository.getDistinctFirstByCryptoCurrencyOrderByPriceAsc(currencyName);
+        return currencyPriceRepository.findFirstByCryptoCurrencyOrderByPriceAsc(currencyName);
     }
 
     @Override
     public CurrencyPrice getMinPrice(String currencyName) {
-        return currencyPriceRepository.getDistinctFirstByCryptoCurrencyOrderByPriceDesc(currencyName);
+        return currencyPriceRepository.findFirstByCryptoCurrencyOrderByPriceDesc(currencyName);
     }
 
     @Override
