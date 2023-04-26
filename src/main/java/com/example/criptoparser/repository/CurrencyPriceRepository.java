@@ -12,4 +12,8 @@ public interface CurrencyPriceRepository extends MongoRepository<CurrencyPrice, 
     List<CurrencyPrice> findByCryptoCurrencyOrderByPriceAsc(String currency1);
 
     Page<CurrencyPrice> findByCryptoCurrencyOrderByPriceAsc(String currency1, Pageable pageable);
+
+    CurrencyPrice getDistinctFirstByCryptoCurrencyOrderByPriceAsc(String currencyName);
+
+    CurrencyPrice getDistinctFirstByCryptoCurrencyOrderByPriceDesc( String currencyName);
 }

@@ -1,5 +1,6 @@
 package com.example.criptoparser.model;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -10,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class CurrencyPrice {
     @Id
     private BigInteger id;
-    private double price;
+    private BigDecimal price;
     private String cryptoCurrency;
     private String fiatCurrency;
 }

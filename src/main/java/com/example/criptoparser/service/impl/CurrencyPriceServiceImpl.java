@@ -58,46 +58,12 @@ public class CurrencyPriceServiceImpl implements CurrencyPriceService {
 
     @Override
     public CurrencyPrice getMaxPrice(String currencyName) {
-        currencyName = currencyName.toUpperCase();
-        if (currencies.contains(currencyName)) {
-            List<CurrencyPrice> list = getCurrency(currencyName);
-            CurrencyPrice api = getBasicObject(list);
-            double max = list.get(0).getPrice();
-            for (CurrencyPrice currency : list) {
-                if (max < currency.getPrice()) {
-                    max = currency.getPrice();
-                    api.setId(currency.getId());
-                    api.setCryptoCurrency(currency.getCryptoCurrency());
-                    api.setFiatCurrency(currency.getFiatCurrency());
-                    api.setPrice(currency.getPrice());
-                }
-            }
-            return api;
-        } else {
-            throw new RuntimeException("Wrong currency");
-        }
+        return currencyPriceRepository.getDistinctFirstByCryptoCurrencyOrderByPriceAsc(currencyName);
     }
 
     @Override
     public CurrencyPrice getMinPrice(String currencyName) {
-        currencyName = currencyName.toUpperCase();
-        if (currencies.contains(currencyName)) {
-            List<CurrencyPrice> list = getCurrency(currencyName);
-            CurrencyPrice api = getBasicObject(list);
-            double min = list.get(0).getPrice();
-            for (CurrencyPrice currency : list) {
-                if (min > currency.getPrice()) {
-                    min = currency.getPrice();
-                    api.setId(currency.getId());
-                    api.setCryptoCurrency(currency.getCryptoCurrency());
-                    api.setFiatCurrency(currency.getFiatCurrency());
-                    api.setPrice(currency.getPrice());
-                }
-            }
-            return api;
-        } else {
-            throw new RuntimeException("Wrong currency");
-        }
+        return currencyPriceRepository.getDistinctFirstByCryptoCurrencyOrderByPriceDesc(currencyName);
     }
 
     @Override
@@ -126,8 +92,8 @@ public class CurrencyPriceServiceImpl implements CurrencyPriceService {
     private ReportRow getCurrencyModel(String currency) {
         ReportRow currencyRow = new ReportRow();
         currencyRow.setCurrencyName(currency);
-        currencyRow.setMinPrice(BigDecimal.valueOf(getMinPrice(currency).getPrice()));
-        currencyRow.setMaxPrice(BigDecimal.valueOf(getMaxPrice(currency).getPrice()));
+        currencyRow.setMinPrice(getMinPrice(currency).getPrice());
+        currencyRow.setMaxPrice(getMaxPrice(currency).getPrice());
         return currencyRow;
     }
 
@@ -140,7 +106,7 @@ public class CurrencyPriceServiceImpl implements CurrencyPriceService {
         api.setId(list.get(0).getId());
         api.setCryptoCurrency(list.get(0).getCryptoCurrency());
         api.setFiatCurrency(list.get(0).getFiatCurrency());
-        api.setPrice(list.get(0).getPrice());
+        api.setPrice(list.get(0).getPrice().doubleValue());
         return currencyPriceMapper.toModel(api);
     }
 }
