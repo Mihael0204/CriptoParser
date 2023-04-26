@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -45,6 +47,7 @@ public class CurrencyPriceServiceImpl implements CurrencyPriceService {
     }
 
     @Scheduled(cron = "*/10 * * * * ?")
+    @PostConstruct
     public void syncExternalCurrency() {
         for (String currency: currencies) {
             ApiCurrencyDto apiCurrencyDto =
