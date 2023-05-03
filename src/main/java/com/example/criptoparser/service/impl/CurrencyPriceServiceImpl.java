@@ -94,17 +94,4 @@ public class CurrencyPriceServiceImpl implements CurrencyPriceService {
         currencyRow.setMaxPrice(getMaxPrice(currency).getPrice());
         return currencyRow;
     }
-
-    private List<CurrencyPrice> getCurrency(String currencyName) {
-        return currencyPriceRepository.findByCryptoCurrencyOrderByPriceAsc(currencyName);
-    }
-
-    private CurrencyPrice getBasicObject(List<CurrencyPrice> list) {
-        ApiCurrencyDto currencyDto = new ApiCurrencyDto();
-        currencyDto.setId(list.get(0).getId());
-        currencyDto.setCryptoCurrency(list.get(0).getCryptoCurrency());
-        currencyDto.setFiatCurrency(list.get(0).getFiatCurrency());
-        currencyDto.setPrice(list.get(0).getPrice().doubleValue());
-        return currencyPriceMapper.toModel(currencyDto);
-    }
 }
