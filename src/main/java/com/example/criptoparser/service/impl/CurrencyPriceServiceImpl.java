@@ -9,12 +9,10 @@ import com.example.criptoparser.service.CurrencyPriceService;
 import com.example.criptoparser.service.FileWriter;
 import com.example.criptoparser.service.HttpClient;
 import com.example.criptoparser.service.ReportCreator;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -58,12 +56,12 @@ public class CurrencyPriceServiceImpl implements CurrencyPriceService {
 
     @Override
     public CurrencyPrice getMaxPrice(String currencyName) {
-        return currencyPriceRepository.findFirstByCryptoCurrencyOrderByPriceAsc(currencyName);
+        return currencyPriceRepository.findFirstByCryptoCurrencyOrderByPriceDesc(currencyName);
     }
 
     @Override
     public CurrencyPrice getMinPrice(String currencyName) {
-        return currencyPriceRepository.findFirstByCryptoCurrencyOrderByPriceDesc(currencyName);
+        return currencyPriceRepository.findFirstByCryptoCurrencyOrderByPriceAsc(currencyName);
     }
 
     @Override
